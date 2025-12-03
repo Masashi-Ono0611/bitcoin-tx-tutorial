@@ -18,7 +18,7 @@ def setup_testshell():
     mining_address = node.getnewaddress()
 
     # Generate 101 blocks so that the first block's block reward reaches maturity
-    node.generatetoaddress(nblocks=101, address=mining_address, invalid_call=False)
+    node.generatetoaddress(nblocks=101, address=mining_address, called_by_framework=True)
 
     # Check that we were able to mine 101 blocks
     assert(node.getblockcount() == 101)
@@ -46,6 +46,6 @@ def fund_address(node, address: str, amount: float) -> (str, int):
 
     # Mine a block to confirm the tx
     mining_address = node.getnewaddress()
-    node.generatetoaddress(nblocks=1, address=mining_address, invalid_call=False)
+    node.generatetoaddress(nblocks=1, address=mining_address, called_by_framework=True)
 
     return txid, index
